@@ -56,7 +56,7 @@ public class ActivateTrigger : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter (Collider other) {
+	void OnTriggerEnter (Collider collider) {
 		DoActivateTrigger ();
 	}
 }
