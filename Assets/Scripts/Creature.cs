@@ -23,7 +23,7 @@ public class Creature : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        
+        //Wait for key input to generate new creature
         if(Input.GetKeyDown("n"))
         {
             Debug.ClearDeveloperConsole();
@@ -32,12 +32,14 @@ public class Creature : MonoBehaviour {
         }
 	}
     
+    //random function, just because
     int getRandomNum(int min,int max)
     {
         int i = Random.Range(min, max);
         return i;
     }
 
+    //function to get random number of parts for the creature
     void creatureParts()
     {
         headNum = getRandomNum(1, 6);
@@ -51,6 +53,7 @@ public class Creature : MonoBehaviour {
         bodySize = new int[bodyNum];
     }
 
+    //function for getting size for the parts
     void creatureSize()
     {
         for(int i = 0; i < 1; i++)
