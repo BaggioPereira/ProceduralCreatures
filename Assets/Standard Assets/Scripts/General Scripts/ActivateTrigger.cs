@@ -7,7 +7,7 @@ public class ActivateTrigger : MonoBehaviour {
 		Activate  = 2, // Activate the target GameObject
 		Enable    = 3, // Enable a component
 		Animate   = 4, // Start animation on target
-		Deactivate= 5 // Decativate target GameObject
+		Deactivate= 5  // Decativate target GameObject
 	}
 
 	/// The action to accomplish
