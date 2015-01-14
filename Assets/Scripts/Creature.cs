@@ -41,31 +41,31 @@ public class Creature : MonoBehaviour {
     void creatureParts()
     {
         headNum = getRandomNum(1, 6);
-        headSize = new int[headNum];
+        headSize = new int[1];
         Debug.Log(headNum);
         armsNum = getRandomNum(1, 11);
-        armSize = new int[armsNum];
+        armSize = new int[2];
         legsNum = getRandomNum(1, 11);
-        legSize = new int[legsNum];
+        legSize = new int[2];
         bodyNum = getRandomNum(1, 6);
         bodySize = new int[bodyNum];
     }
 
     void creatureSize()
     {
-        for(int i = 0; i < headNum;i++)
+        for(int i = 0; i < 1; i++)
         {
             headSize[i] = getRandomNum(1, 4);
             Debug.Log(headSize[i]);
         }
 
-        for (int i = 0; i < armsNum; i++)
+        for (int i = 0; i < 2; i++)
         {
             armSize[i] = getRandomNum(1, 4);
             //Debug.Log(headSize[i]);
         }
 
-        for (int i = 0; i < legsNum; i++)
+        for (int i = 0; i < 2; i++)
         {
             legSize[i] = getRandomNum(1, 4);
             //Debug.Log(headSize[i]);
