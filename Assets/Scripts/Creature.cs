@@ -4,6 +4,9 @@ using System.Collections;
 
 public class Creature : MonoBehaviour {
 
+    private GameObject Creatures;
+    private ArrayList myNodes;
+
     int headNum;
     int armsNum;
     int legsNum;
@@ -18,6 +21,16 @@ public class Creature : MonoBehaviour {
     {
         creatureParts();
         creatureSize();
+
+        myNodes = new ArrayList();
+
+        for (int i = 0; i < 7; i++)
+        {
+            Creatures = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            Creatures.transform.position = new Vector3((Random.Range(-10, 11)), (Random.Range(-10, 11)), 0f);
+            Creatures.tag = "Player";
+            myNodes.Add(Creatures);
+        }
 	}
 	
 	// Update is called once per frame
@@ -29,6 +42,22 @@ public class Creature : MonoBehaviour {
             Debug.ClearDeveloperConsole();
             creatureParts();
             creatureSize();
+
+            //Test for creating and deleteing cube meshes
+
+            GameObject[] GameObjects = GameObject.FindGameObjectsWithTag("Player");
+            for (int i = 0; i < GameObjects.Length; i++)
+            {
+                Destroy(GameObjects[i]);
+            }
+
+                for (int i = 0; i < 7; i++)
+                {
+                    Creatures = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    Creatures.transform.position = new Vector3((Random.Range(-10, 11)), (Random.Range(-10, 11)), 0f);
+                    Creatures.tag = "Player";
+                    myNodes.Add(Creatures);
+                }
         }
 	}
     
@@ -79,5 +108,11 @@ public class Creature : MonoBehaviour {
             bodySize[i] = getRandomNum(1, 4);
             //Debug.Log(headSize[i]);
         }
+    }
+
+    //creates creature according to values provided
+    void create()
+    {
+        
     }
 }
