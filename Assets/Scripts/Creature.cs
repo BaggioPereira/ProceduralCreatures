@@ -24,13 +24,14 @@ public class Creature : MonoBehaviour {
 
         myNodes = new ArrayList();
 
-        for (int i = 0; i < 7; i++)
-        {
-            Creatures = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            Creatures.transform.position = new Vector3((Random.Range(-10, 11)), (Random.Range(-10, 11)), 0f);
-            Creatures.tag = "Player";
-            myNodes.Add(Creatures);
-        }
+        //for (int i = 0; i < 7; i++)
+        //{
+        //    Creatures = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        //    Creatures.transform.position = new Vector3((Random.Range(-10, 11)), (Random.Range(-10, 11)), 0f);
+        //    Creatures.tag = "Player";
+        //    myNodes.Add(Creatures);
+        //}
+        create();
 	}
 	
 	// Update is called once per frame
@@ -51,13 +52,14 @@ public class Creature : MonoBehaviour {
                 Destroy(GameObjects[i]);
             }
 
-                for (int i = 0; i < 7; i++)
-                {
-                    Creatures = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    Creatures.transform.position = new Vector3((Random.Range(-10, 11)), (Random.Range(-10, 11)), 0f);
-                    Creatures.tag = "Player";
-                    myNodes.Add(Creatures);
-                }
+            //for (int i = 0; i < 7; i++)
+            //{
+            //    Creatures = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            //    Creatures.transform.position = new Vector3((Random.Range(-10, 11)), (Random.Range(-10, 11)), 0f);
+            //    Creatures.tag = "Player";
+            //    myNodes.Add(Creatures);
+            //}
+            create();
         }
 	}
     
@@ -73,11 +75,11 @@ public class Creature : MonoBehaviour {
     {
         headNum = getRandomNum(1, 6);
         headSize = new int[1];
-        Debug.Log(headNum);
-        armsNum = getRandomNum(1, 11);
+        armsNum = getRandomNum(2, 11);
         armSize = new int[2];
-        legsNum = getRandomNum(1, 11);
+        legsNum = getRandomNum(2, 11);
         legSize = new int[2];
+        Debug.Log(legsNum);
         bodyNum = getRandomNum(1, 6);
         bodySize = new int[bodyNum];
     }
@@ -88,7 +90,7 @@ public class Creature : MonoBehaviour {
         for(int i = 0; i < 1; i++)
         {
             headSize[i] = getRandomNum(1, 4);
-            Debug.Log(headSize[i]);
+            //Debug.Log(headSize[i]);
         }
 
         for (int i = 0; i < 2; i++)
@@ -113,6 +115,19 @@ public class Creature : MonoBehaviour {
     //creates creature according to values provided
     void create()
     {
-        
+        int x = 0, y = 0, z = 0;
+        for(int i = 0; i < legSize.Length; i++)
+        {
+            for (int j = 0; j < legsNum; j++)
+            {
+                Creatures = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                Creatures.transform.position = new Vector3(x,y,z);
+                Creatures.transform.localScale = new Vector3(legSize[i], legSize[i] * 3.0f, legSize[i]);
+                Creatures.tag = "Player";
+                myNodes.Add(Creatures);
+                x = legSize[i] * 3;
+            }
+            y = legSize[i] * 3;
+        }
     }
 }
