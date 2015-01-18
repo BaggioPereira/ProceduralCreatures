@@ -32,7 +32,7 @@ public class Creature : MonoBehaviour {
         //    Creatures.tag = "Player";
         //    myNodes.Add(Creatures);
         //}
-        createLegs();
+        create();
 	}
 	
 	// Update is called once per frame
@@ -54,7 +54,7 @@ public class Creature : MonoBehaviour {
             //    Creatures.tag = "Player";
             //    myNodes.Add(Creatures);
             //}
-            createLegs();
+            create();
         }
 	}
     
@@ -151,15 +151,16 @@ public class Creature : MonoBehaviour {
     void create()
     {
         float x = 0, y = 0, z = 0;
-        y = bodySize[0]*0.5f;
         for (int i = 0; i<bodyNum; i++)
         {
+            y = y + (bodySize[i] * 0.5f);
             Creatures = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             Creatures.transform.position = new Vector3(x, y, z);
             Creatures.transform.localScale = new Vector3(bodySize[i], bodySize[i], bodySize[i]);
             Creatures.tag = Tags.body;
+            Creatures.name = "Body";
             myNodes.Add(Creatures);
-            y = y + bodySize[i];
+            y = y + (bodySize[i]*0.5f);
         }
     }
 
