@@ -115,19 +115,21 @@ public class Creature : MonoBehaviour {
     //creates creature according to values provided
     void create()
     {
-        int x = 0, y = 0, z = 0;
+        float x = 0, y = 0, z = 0;
         for(int i = 0; i < legSize.Length; i++)
         {
+            y = y + legSize[i] * 0.75f;   
             for (int j = 0; j < legsNum; j++)
             {
                 Creatures = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 Creatures.transform.position = new Vector3(x,y,z);
-                Creatures.transform.localScale = new Vector3(legSize[i], legSize[i] * 3.0f, legSize[i]);
+                Creatures.transform.localScale = new Vector3(legSize[i]*0.5f, legSize[i]*0.5f * 3.0f, legSize[i]*0.5f);
                 Creatures.tag = "Player";
                 myNodes.Add(Creatures);
-                x = legSize[i] * 3;
+                x = x + legSize[0] * 2;
             }
-            y = legSize[i] * 3;
+            x = 0;
+            y = legSize[i] * 1.5f;
         }
     }
 }
