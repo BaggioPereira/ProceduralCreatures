@@ -45,13 +45,7 @@ public class Creature : MonoBehaviour {
             creatureParts();
             creatureSize();
 
-            //Test for creating and deleteing cube meshes
-
-            GameObject[] GameObjects = GameObject.FindGameObjectsWithTag("Player");
-            for (int i = 0; i < GameObjects.Length; i++)
-            {
-                Destroy(GameObjects[i]);
-            }
+            clear();
 
             //for (int i = 0; i < 7; i++)
             //{
@@ -113,6 +107,45 @@ public class Creature : MonoBehaviour {
         }
     }
 
+    void clear()
+    {
+        GameObject[] GameObjects = GameObject.FindGameObjectsWithTag("Lower Leg");
+        for (int i = 0; i < GameObjects.Length; i++)
+        {
+            Destroy(GameObjects[i]);
+        }
+
+        GameObjects = GameObject.FindGameObjectsWithTag("Upper Leg");
+        for (int i = 0; i < GameObjects.Length; i++)
+        {
+            Destroy(GameObjects[i]);
+        }
+
+        GameObjects = GameObject.FindGameObjectsWithTag("Lower Arm");
+        for (int i = 0; i < GameObjects.Length; i++)
+        {
+            Destroy(GameObjects[i]);
+        }
+
+        GameObjects = GameObject.FindGameObjectsWithTag("Upper Arm");
+        for (int i = 0; i < GameObjects.Length; i++)
+        {
+            Destroy(GameObjects[i]);
+        }
+
+        GameObjects = GameObject.FindGameObjectsWithTag("Head");
+        for (int i = 0; i < GameObjects.Length; i++)
+        {
+            Destroy(GameObjects[i]);
+        }
+
+        GameObjects = GameObject.FindGameObjectsWithTag("Body");
+        for (int i = 0; i < GameObjects.Length; i++)
+        {
+            Destroy(GameObjects[i]);
+        }
+    }
+
     //creates creature according to values provided
 
     void create()
@@ -124,7 +157,7 @@ public class Creature : MonoBehaviour {
             Creatures = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             Creatures.transform.position = new Vector3(x, y, z);
             Creatures.transform.localScale = new Vector3(bodySize[i], bodySize[i], bodySize[i]);
-            Creatures.tag = "Player";
+            Creatures.tag = Tags.body;
             myNodes.Add(Creatures);
             y = y + bodySize[i];
         }
@@ -146,10 +179,12 @@ public class Creature : MonoBehaviour {
                 if(lower)
                 {
                     Creatures.tag = Tags.lower_leg;
+                    Creatures.name = "Lower Leg";
                 }
                 else
                 {
                     Creatures.tag = Tags.upper_leg;
+                    Creatures.name = "Upper Leg";
                 }
                 myNodes.Add(Creatures);
                 z = legSize[0]*-1.25f;
@@ -159,16 +194,19 @@ public class Creature : MonoBehaviour {
                 if (lower)
                 {
                     Creatures.tag = Tags.lower_leg;
+                    Creatures.name = "Lower Leg";
                 }
                 else
                 {
-                    Creatures.tag = Tags.upper_arm;
+                    Creatures.tag = Tags.upper_leg;
+                    Creatures.name = "Upper Leg";
                 }
                 myNodes.Add(Creatures);
                 x = x + legSize[0] * 2;
             }
             x = 0;
             y = legSize[i] * 1.5f;
+            lower = false;
         }
     }
 }

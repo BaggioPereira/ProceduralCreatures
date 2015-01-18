@@ -3,6 +3,12 @@
 --- !u!78 &1
 TagManager:
   tags:
+  - Head
+  - Body
+  - Upper Arm
+  - Lower Arm
+  - Upper Leg
+  - Lower Leg
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
