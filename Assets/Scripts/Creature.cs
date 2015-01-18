@@ -73,11 +73,11 @@ public class Creature : MonoBehaviour {
     //function to get random number of parts for the creature
     void creatureParts()
     {
-        headNum = getRandomNum(1, 6);
+        headNum = getRandomNum(1, 4);
         headSize = new int[1];
-        armsNum = getRandomNum(2, 11);
+        armsNum = getRandomNum(1, 6);
         armSize = new int[2];
-        legsNum = getRandomNum(2, 11);
+        legsNum = getRandomNum(1, 6);
         legSize = new int[2];
         Debug.Log(legsNum);
         bodyNum = getRandomNum(1, 6);
@@ -121,9 +121,16 @@ public class Creature : MonoBehaviour {
             y = y + legSize[i] * 0.75f;   
             for (int j = 0; j < legsNum; j++)
             {
+                z = legSize[0]*1.25f; 
                 Creatures = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 Creatures.transform.position = new Vector3(x,y,z);
                 Creatures.transform.localScale = new Vector3(legSize[i]*0.5f, legSize[i]*0.5f * 3.0f, legSize[i]*0.5f);
+                Creatures.tag = "Player";
+                myNodes.Add(Creatures);
+                z = legSize[0]*-1.25f;
+                Creatures = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                Creatures.transform.position = new Vector3(x, y, z);
+                Creatures.transform.localScale = new Vector3(legSize[i] * 0.5f, legSize[i] * 0.5f * 3.0f, legSize[i] * 0.5f);
                 Creatures.tag = "Player";
                 myNodes.Add(Creatures);
                 x = x + legSize[0] * 2;
