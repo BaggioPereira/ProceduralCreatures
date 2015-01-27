@@ -92,7 +92,7 @@ public class Creature : MonoBehaviour {
 
         for (int i = 0; i < 2; i++)
         {
-            armSize[i] = getRandomNum(1, 4);
+            armSize[i] = getRandomNum(1, 3);
             //Debug.Log(headSize[i]);
         }
 
@@ -192,6 +192,7 @@ public class Creature : MonoBehaviour {
     {
         float x = 0, y = 0, z = 0;
         int last = 0;
+        int armsCreated = 0;
         y = height;
         for (int i = 0; i<bodyNum; i++)
         {
@@ -203,6 +204,44 @@ public class Creature : MonoBehaviour {
             Creatures.tag = Tags.body;
             Creatures.name = "Body";
             myNodes.Add(Creatures);
+            if(armsCreated < armsNum)
+            {
+                z -= (bodySize[i] * 0.5f) + (armSize[0] *0.75f);
+                Creatures = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                Creatures.transform.position = new Vector3(x, y, z);
+                Creatures.transform.localScale = new Vector3(armSize[0] * 0.5f, armSize[0] * 0.5f, armSize[0] * 1.5f);
+                Creatures.tag = Tags.upper_arm;
+                Creatures.name = "Upper Arm";
+                myNodes.Add(Creatures);
+
+                z -= (armSize[0] * 0.75f) + (armSize[1] * 0.75f);
+                Creatures = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                Creatures.transform.position = new Vector3(x, y, z);
+                Creatures.transform.localScale = new Vector3(armSize[1] * 0.5f, armSize[1] * 0.5f, armSize[1] * 1.5f);
+                Creatures.tag = Tags.lower_arm;
+                Creatures.name = "Lower Arm";
+                myNodes.Add(Creatures);
+
+                z = 0;
+
+                z += (bodySize[i] * 0.5f) + (armSize[0] * 0.75f);
+                Creatures = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                Creatures.transform.position = new Vector3(x, y, z);
+                Creatures.transform.localScale = new Vector3(armSize[0] * 0.5f, armSize[0] * 0.5f, armSize[0] * 1.5f);
+                Creatures.tag = Tags.upper_arm;
+                Creatures.name = "Upper Arm";
+                myNodes.Add(Creatures);
+
+                z += (armSize[0] * 0.75f) + (armSize[1] * 0.75f);
+                Creatures = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                Creatures.transform.position = new Vector3(x, y, z);
+                Creatures.transform.localScale = new Vector3(armSize[1] * 0.5f, armSize[1] * 0.5f, armSize[1] * 1.5f);
+                Creatures.tag = Tags.lower_arm;
+                Creatures.name = "Lower Arm";
+                myNodes.Add(Creatures);
+                armsCreated += 1;
+                z = 0;
+            }
             y = y - (bodySize[i]*0.5f);
             last+=1;
         }
@@ -210,11 +249,6 @@ public class Creature : MonoBehaviour {
         last -= 1;
         height = y;
         createLegs();
-    }
-
-    void createArms()
-    {
-
     }
 
     void createLegs()
@@ -265,5 +299,4 @@ public class Creature : MonoBehaviour {
         }
         //bodyPos = y;
     }
-
 }
