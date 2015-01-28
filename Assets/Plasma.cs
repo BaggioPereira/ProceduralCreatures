@@ -211,22 +211,29 @@ public class Plasma : MonoBehaviour {
 		  			something = heights[i,j];
 		  
 		  if (something <= 1.0f && something >0.75f){
-		  		colormap.SetPixel(i,j, new Color(255,0,255));
+					//colormap.SetPixel(i,j, new Color (0,0,0));
+					colormap.SetPixel(i,j, new Color(255/255.0f,255/255.0f,255/255.0f));
 		  }
-			if (something <= 0.74f && something >0.66f){
-					colormap.SetPixel(i,j, new Color(128,64,0));
+			if (something <= 0.75f && something >0.66f){
+					colormap.SetPixel(i,j, new Color (192/255.0f,192/255.0f,192/255.0f));
+					//colormap.SetPixel(i,j, new Color(255/255.0f,255/255.0f,255/255.0f));
+
 			}
-				if (something <= 0.65f && something > 0.26f){
-					colormap.SetPixel(i,j, new Color (0,64,0));
+				if (something <= 0.66f && something > 0.56f){
+					colormap.SetPixel(i,j, new Color(128/255.0f,64/255.0f,0));
+					//colormap.SetPixel(i,j, new Color(255/255.0f,255/255.0f,255/255.0f));
+
 				}
-					if (something <=0.25f && something > 0.0f){
-					colormap.SetPixel(i,j, new Color(0,128,0));
+					if (something <=0.56f && something > 0.0f){
+					colormap.SetPixel(i,j, new Color(0,64/255.0f,0));
+					//colormap.SetPixel(i,j, new Color(255/255.0f,255/255.0f,255/255.0f));
+
 				}
 
 		}
 		}
-		byte[] img = colormap.EncodeToPNG ();
-		File.WriteAllBytes (Application.dataPath + "/map" + ".png", img);
+		//byte[] img = colormap.EncodeToPNG ();
+		//File.WriteAllBytes (Application.dataPath + "/map" + ".png", img);
 		colormap.Apply ();
 
 
