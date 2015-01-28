@@ -6,6 +6,8 @@ public class Creature : MonoBehaviour {
     private GameObject Creatures, camera;
     private ArrayList myNodes;
 
+    Light light1, light2, light3;
+
     int headNum;
     int armsNum;
     int legsNum;
@@ -26,6 +28,12 @@ public class Creature : MonoBehaviour {
         creatureSize();
 
         myNodes = new ArrayList();
+
+        light1 = new Light();
+        light2 = new Light();
+        light3 = new Light();
+
+        //light1.transform.position =new Vector3(0, (height*0.5f),0);
 
         camera.transform.LookAt(new Vector3(0, (height * 0.5f), 0));
 
@@ -85,6 +93,8 @@ public class Creature : MonoBehaviour {
         {
             camera.transform.RotateAround(new Vector3(0, (height * 0.5f), 0), Vector3.up, Time.deltaTime * 25.0f);
         }
+
+        //light1.color = new Color(Random.value,Random.value,Random.value);
 	}
     
     //random function, just because
