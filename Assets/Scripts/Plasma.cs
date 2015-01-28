@@ -14,7 +14,7 @@ public class Plasma : MonoBehaviour {
     float r, g, b;
     Texture2D texture, colormap;
     float[,] heights;
-    GameObject terrain, camera;
+    GameObject terrain;
     TerrainData tData;
     public bool orbit = false;
 
@@ -28,9 +28,9 @@ public class Plasma : MonoBehaviour {
 		colormap = new Texture2D (width, length);
 		renderer.material.mainTexture = colormap;
 
-        camera = GameObject.FindGameObjectWithTag("MainCamera");
-        camera.transform.position = new Vector3(525, 1450, -250);
-        camera.transform.LookAt(new Vector3(512, 0, 512), Vector3.up);
+        //camera = GameObject.FindGameObjectWithTag("MainCamera");
+        //camera.transform.position = new Vector3(525, 1450, -250);
+        //camera.transform.LookAt(new Vector3(512, 0, 512), Vector3.up);
 
         colour = new Color[width * length];
 
@@ -73,23 +73,23 @@ public class Plasma : MonoBehaviour {
             Application.Quit();
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            if (orbit == true)
-            {
-                orbit = false;
-            }
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    if (orbit == true)
+        //    {
+        //        orbit = false;
+        //    }
 
-            else
-            {
-                orbit = true;
-            }
-        }
+        //    else
+        //    {
+        //        orbit = true;
+        //    }
+        //}
 
-        if (orbit)
-        {
-            camera.transform.RotateAround(new Vector3(512, 0, 512), Vector3.up, Time.deltaTime * 15);
-        }
+        //if (orbit)
+        //{
+        //    camera.transform.RotateAround(new Vector3(512, 0, 512), Vector3.up, Time.deltaTime * 15);
+        //}
 	}
 
     float displace(float num)
@@ -205,38 +205,41 @@ public class Plasma : MonoBehaviour {
             }
         }
 
-		float something = 0;
-		for (int i = 0; i < width; i++){
-			for (int j = 0; j < width; j++){
-		  			something = heights[i,j];
-		  
-		  if (something <= 1.0f && something >0.75f){
-					//colormap.SetPixel(i,j, new Color (0,0,0));
-					colormap.SetPixel(i,j, new Color(255/255.0f,255/255.0f,255/255.0f));
-		  }
-			if (something <= 0.75f && something >0.66f){
-					colormap.SetPixel(i,j, new Color (192/255.0f,192/255.0f,192/255.0f));
-					//colormap.SetPixel(i,j, new Color(255/255.0f,255/255.0f,255/255.0f));
+		float size = 0;
+		for (int i = 0; i < width; i++)
+        {
+			for (int j = 0; j < width; j++)
+            {
+		  		size = heights[i,j];
 
-			}
-				if (something <= 0.66f && something > 0.56f){
-					colormap.SetPixel(i,j, new Color(128/255.0f,64/255.0f,0));
-					//colormap.SetPixel(i,j, new Color(255/255.0f,255/255.0f,255/255.0f));
+                if (size <= 1.0f && size > 0.75f)
+                {
+                    //colormap.SetPixel(i,j, new Color (0,0,0));
+                    colormap.SetPixel(i, j, new Color(1.0f,1.0f,1.0f));
+                }
 
+			    else if (size <= 0.75f && size >0.66f)
+                {
+					colormap.SetPixel(i,j, new Color (0.4f, 0.26f, 0.13f));
+					//colormap.SetPixel(i,j, new Color(255/255.0f,255/255.0f,255/255.0f));
+			    }
+				
+                else if (size <= 0.66f && size> 0.56f)
+                {
+					colormap.SetPixel(i,j, new Color(0.0f, 0.32f, 0.0f));
+					//colormap.SetPixel(i,j, new Color(255/255.0f,255/255.0f,255/255.0f));
 				}
-					if (something <=0.56f && something > 0.0f){
-					colormap.SetPixel(i,j, new Color(0,64/255.0f,0));
+
+			    else if (size <=0.56f && size > 0.0f)
+                {
+					colormap.SetPixel(i,j, new Color(0.0f, 0.5f, 0.0f));
 					//colormap.SetPixel(i,j, new Color(255/255.0f,255/255.0f,255/255.0f));
-
 				}
-
-		}
+		    }
 		}
 		//byte[] img = colormap.EncodeToPNG ();
 		//File.WriteAllBytes (Application.dataPath + "/map" + ".png", img);
 		colormap.Apply ();
-
-
         applyTerrain();
     }
 
@@ -244,15 +247,15 @@ public class Plasma : MonoBehaviour {
     {
         tData = new TerrainData();
         tData.heightmapResolution = width;
-        tData.size = new Vector3(width, 255, width);
+        tData.size = new Vector3(width*4, 255, width*4);
         tData.SetHeights(0, 0, heights);
         SplatPrototype[] terrainTexture = new SplatPrototype[1];
         terrainTexture[0] = new SplatPrototype();
         terrainTexture[0].texture = colormap;
-        terrainTexture[0].tileSize = new Vector2(width,length);
+        terrainTexture[0].tileSize = new Vector2(width*4,length*4);
         tData.splatPrototypes = terrainTexture;
         terrain = Terrain.CreateTerrainGameObject(tData);
-		terrain.transform.position = new Vector3 (0, -255, 0);
+		terrain.transform.position = new Vector3 (-width*2, -128, -width*2);
         terrain.name = "Terrain";
         terrain.tag = "Player";
     }
