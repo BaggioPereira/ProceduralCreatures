@@ -10,4 +10,5 @@ public class Tags : MonoBehaviour
     public const string lower_arm = "Lower Arm";
     public const string body = "Body";
     public const string head = "Head";
+    public const string hip = "Hip";
 }

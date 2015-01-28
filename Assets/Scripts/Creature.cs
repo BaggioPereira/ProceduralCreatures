@@ -188,6 +188,12 @@ public class Creature : MonoBehaviour {
         {
             Destroy(GameObjects[i]);
         }
+
+        GameObjects = GameObject.FindGameObjectsWithTag("Hip");
+        for (int i = 0; i < GameObjects.Length; i++)
+        {
+            Destroy(GameObjects[i]);
+        }
     }
 
     //creates creature according to values provided
@@ -293,6 +299,17 @@ public class Creature : MonoBehaviour {
             y -= (legSize[i] * 0.75f);
             for (int j = 0; j < legsNum; j++)
             {
+                if(!lower)
+                {
+                    z = 0;
+                    y += legSize[0] * 0.5f;
+                    Creatures = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    Creatures.transform.position = new Vector3(x, y, z);
+                    Creatures.tag = Tags.hip;
+                    Creatures.name = "Hip";
+                    y -= legSize[0] * 0.5f;
+                }
+
                 z = legSize[0]; 
                 Creatures = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 Creatures.transform.position = new Vector3(x,y,z);
