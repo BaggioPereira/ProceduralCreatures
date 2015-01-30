@@ -28,10 +28,6 @@ public class Plasma : MonoBehaviour {
 		colormap = new Texture2D (width, length);
 		renderer.material.mainTexture = colormap;
 
-        //camera = GameObject.FindGameObjectWithTag("MainCamera");
-        //camera.transform.position = new Vector3(525, 1450, -250);
-        //camera.transform.LookAt(new Vector3(512, 0, 512), Vector3.up);
-
         colour = new Color[width * length];
 
         //sets a random height between 0 and 1 for the 4 corners of the grid
@@ -51,7 +47,7 @@ public class Plasma : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-       if(Input.GetKeyDown("n"))
+       if(Input.GetKeyDown("t"))
        {
            GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
            for (int i = 0; i < objs.Length; i++ )
@@ -72,24 +68,6 @@ public class Plasma : MonoBehaviour {
         {
             Application.Quit();
         }
-
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    if (orbit == true)
-        //    {
-        //        orbit = false;
-        //    }
-
-        //    else
-        //    {
-        //        orbit = true;
-        //    }
-        //}
-
-        //if (orbit)
-        //{
-        //    camera.transform.RotateAround(new Vector3(512, 0, 512), Vector3.up, Time.deltaTime * 15);
-        //}
 	}
 
     float displace(float num)
@@ -255,7 +233,7 @@ public class Plasma : MonoBehaviour {
         terrainTexture[0].tileSize = new Vector2(width*4,length*4);
         tData.splatPrototypes = terrainTexture;
         terrain = Terrain.CreateTerrainGameObject(tData);
-		terrain.transform.position = new Vector3 (-width*2, -128, -width*2);
+		terrain.transform.position = new Vector3 (-width*2, -255, -width*2);
         terrain.name = "Terrain";
         terrain.tag = "Player";
     }
