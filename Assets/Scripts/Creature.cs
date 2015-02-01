@@ -14,7 +14,7 @@ public class Creature : MonoBehaviour {
     //int[] armSize;
     int[] legSize;
     int[] bodySize;
-
+    
     float height;
     bool orbit = false;
 
@@ -22,14 +22,14 @@ public class Creature : MonoBehaviour {
 	void Start () 
     {
         camera = GameObject.FindGameObjectWithTag("MainCamera");
-        creatureParts();
-        creatureSize();
+        //creatureParts();
+        //creatureSize();
 
         myNodes = new ArrayList();
 
-        camera.transform.LookAt(new Vector3(0, (height * 0.5f), 0));
+        //camera.transform.LookAt(new Vector3(0, (height * 0.5f), 0));
 
-        createHead();
+        //createHead();
 	}
 	
 	// Update is called once per frame
@@ -66,6 +66,60 @@ public class Creature : MonoBehaviour {
             camera.transform.RotateAround(new Vector3(0, (height * 0.5f), 0), Vector3.up, Time.deltaTime * 25.0f);
         }
 	}
+
+    void OnGUI()
+    {
+        if (GUI.Button(new Rect(25f, 25f, 60f, 25f), "Random"))
+        {
+            clear();
+            creatureParts();
+            creatureSize();
+            creatureHeight();
+            camera.transform.LookAt(new Vector3(0, (height * 0.5f), 0));
+            createHead();
+        }
+
+        if(GUI.Button(new Rect(25f,50f,60f,25f),"Create"))
+        {
+            clear();
+            creatureSize();
+            creatureHeight();
+            camera.transform.LookAt(new Vector3(0, (height * 0.5f), 0));
+            createHead();
+        }
+
+        if (GUI.Button(new Rect(25f, 275f, 120f, 25f), "Rotate Camera"))
+        {
+            if(orbit)
+            {
+                orbit = false;
+            }
+            else
+            {
+                orbit = true;
+            }
+        }
+
+        GUI.Label(new Rect(25f,75f,120f,25f),"Number of Heads = ");
+        GUI.Label(new Rect(150f, 75f, 25f, 25f), headNum.ToString());
+        headNum = Mathf.RoundToInt(GUI.HorizontalSlider(new Rect(25f, 100f, 60f, 25f), headNum, 1, 3));
+
+        GUI.Label(new Rect(25f, 125f, 120f, 25f), "Number of Bodys = ");
+        GUI.Label(new Rect(150f, 125f, 25f, 25f), bodyNum.ToString());
+        bodyNum = Mathf.RoundToInt(GUI.HorizontalSlider(new Rect(25f, 150f, 60f, 25f), bodyNum, 2, 5));
+        bodySize = new int[bodyNum];
+
+        GUI.Label(new Rect(25f, 175f, 120f, 25f), "Number of Arms = ");
+        GUI.Label(new Rect(150f, 175f, 25f, 25f), armsNum.ToString());
+        armsNum = Mathf.RoundToInt(GUI.HorizontalSlider(new Rect(25f, 200f, 60f, 25f), armsNum, 0, bodyNum));
+
+        GUI.Label(new Rect(25f, 225f, 120f, 25f), "Number of Legs = ");
+        GUI.Label(new Rect(150f, 225f, 25f, 25f), legsNum.ToString());
+        legsNum = Mathf.RoundToInt(GUI.HorizontalSlider(new Rect(25f, 250f, 60f, 25f), legsNum, 1, 5));
+        legSize = new int[2];
+
+
+    }
     
     //random function, just because
     int getRandomNum(int min,int max)
@@ -85,7 +139,6 @@ public class Creature : MonoBehaviour {
         //armSize = new int[2];
         legsNum = getRandomNum(1, 6);
         legSize = new int[2];
-        Debug.Log(legsNum);
     }
 
     //function for getting size for the parts
@@ -114,7 +167,6 @@ public class Creature : MonoBehaviour {
             bodySize[i] = getRandomNum(1, 4);
             //Debug.Log(headSize[i]);
         }
-        creatureHeight();
     }
 
     //Gets the creatures height from the size of the parts
@@ -351,17 +403,17 @@ public class Creature : MonoBehaviour {
                 size--;
             }
         }
+        //heirarchy();
     }
 
-    //sort the hierarchy for the creature
-    void heirarchy()
-    {
-        GameObject[] heads = GameObject.FindGameObjectsWithTag("Head");
-        GameObject[] body = GameObject.FindGameObjectsWithTag("Body");
-        GameObject[] upper_arm = GameObject.FindGameObjectsWithTag("Upper Arm");
-        GameObject[] lower_arm = GameObject.FindGameObjectsWithTag("Lower Arm");
-        GameObject[] hip = GameObject.FindGameObjectsWithTag("Hip");
-        GameObject[] upper_leg = GameObject.FindGameObjectsWithTag("Upper Leg");
-        GameObject[] lower_leg = GameObject.FindGameObjectsWithTag("Lower Leg");
-    }
+    //void heirarchy()
+    //{
+    //    GameObject[] heads = GameObject.FindGameObjectsWithTag("Head");
+    //    GameObject[] body = GameObject.FindGameObjectsWithTag("Body");
+    //    GameObject[] upper_arm = GameObject.FindGameObjectsWithTag("Upper Arm");
+    //    GameObject[] lower_arm = GameObject.FindGameObjectsWithTag("Lower Arm");
+    //    GameObject[] hip = GameObject.FindGameObjectsWithTag("Hip");
+    //    GameObject[] upper_leg = GameObject.FindGameObjectsWithTag("Upper Leg");
+    //    GameObject[] lower_leg = GameObject.FindGameObjectsWithTag("Lower Leg");
+    //}
 }

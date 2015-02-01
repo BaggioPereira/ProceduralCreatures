@@ -70,6 +70,26 @@ public class Plasma : MonoBehaviour {
         }
 	}
 
+    void OnGUI()
+    {
+        if (GUI.Button(new Rect(25f, 300f, 120f, 25f), "New Terrain"))
+        {
+            GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+            for (int i = 0; i < objs.Length; i++)
+            {
+                Destroy(objs[i]);
+            }
+            cor1 = Random.value;
+            cor2 = Random.value;
+            cor3 = Random.value;
+            cor4 = Random.value;
+            drawPlasma(width, length);
+            texture.SetPixels(colour);
+            texture.Apply();
+            loadHeightMap();
+        }
+    }
+
     float displace(float num)
     {
         float max = num / size * 8;
