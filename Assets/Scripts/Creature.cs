@@ -11,7 +11,6 @@ public class Creature : MonoBehaviour {
     int legsNum;
     int bodyNum;
     int headSize;
-    //int[] armSize;
     int[] legSize;
     int[] bodySize;
     
@@ -22,44 +21,13 @@ public class Creature : MonoBehaviour {
 	void Start () 
     {
         camera = GameObject.FindGameObjectWithTag("MainCamera");
-        //creatureParts();
-        //creatureSize();
 
         myNodes = new ArrayList();
-
-        //camera.transform.LookAt(new Vector3(0, (height * 0.5f), 0));
-
-        //createHead();
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
-        //Wait for key input to generate new creature
-        if(Input.GetKeyDown("c"))
-        {
-            creatureParts();
-            creatureSize();
-
-            camera.transform.LookAt(new Vector3(0, (height * 0.5f), 0));
-            
-            clear();
-            createHead();
-        }
-
-        //key input for auto rotate camera around creature
-        if(Input.GetKeyDown("r"))
-        {
-            if(orbit)
-            {
-                orbit = false;
-            }
-            else
-            {
-                orbit = true;
-            }
-        }
-
         //if allowed to rotate, rotate over time
         if(orbit)
         {
@@ -69,6 +37,7 @@ public class Creature : MonoBehaviour {
 
     void OnGUI()
     {
+        //a GUI button for generating a random creature
         if (GUI.Button(new Rect(25f, 25f, 60f, 25f), "Random"))
         {
             clear();
@@ -79,6 +48,7 @@ public class Creature : MonoBehaviour {
             createHead();
         }
 
+        //a GUI button for creating a creature with set variables
         if(GUI.Button(new Rect(25f,50f,60f,25f),"Create"))
         {
             clear();
@@ -88,6 +58,7 @@ public class Creature : MonoBehaviour {
             createHead();
         }
 
+        //a GUI button to toggle the camera rotation
         if (GUI.Button(new Rect(25f, 275f, 120f, 25f), "Rotate Camera"))
         {
             if(orbit)
@@ -102,23 +73,21 @@ public class Creature : MonoBehaviour {
 
         GUI.Label(new Rect(25f,75f,120f,25f),"Number of Heads = ");
         GUI.Label(new Rect(150f, 75f, 25f, 25f), headNum.ToString());
-        headNum = Mathf.RoundToInt(GUI.HorizontalSlider(new Rect(25f, 100f, 60f, 25f), headNum, 1, 3));
+        headNum = Mathf.RoundToInt(GUI.HorizontalSlider(new Rect(25f, 100f, 60f, 25f), headNum, 1, 3)); //a GUI slider to set the number of heads
 
         GUI.Label(new Rect(25f, 125f, 120f, 25f), "Number of Bodys = ");
         GUI.Label(new Rect(150f, 125f, 25f, 25f), bodyNum.ToString());
-        bodyNum = Mathf.RoundToInt(GUI.HorizontalSlider(new Rect(25f, 150f, 60f, 25f), bodyNum, 2, 5));
+        bodyNum = Mathf.RoundToInt(GUI.HorizontalSlider(new Rect(25f, 150f, 60f, 25f), bodyNum, 2, 5)); // a GUI slider to set the number of body parts
         bodySize = new int[bodyNum];
 
         GUI.Label(new Rect(25f, 175f, 120f, 25f), "Number of Arms = ");
         GUI.Label(new Rect(150f, 175f, 25f, 25f), armsNum.ToString());
-        armsNum = Mathf.RoundToInt(GUI.HorizontalSlider(new Rect(25f, 200f, 60f, 25f), armsNum, 0, bodyNum));
+        armsNum = Mathf.RoundToInt(GUI.HorizontalSlider(new Rect(25f, 200f, 60f, 25f), armsNum, 0, bodyNum)); // a GUI slider to set the number of arms
 
         GUI.Label(new Rect(25f, 225f, 120f, 25f), "Number of Legs = ");
         GUI.Label(new Rect(150f, 225f, 25f, 25f), legsNum.ToString());
-        legsNum = Mathf.RoundToInt(GUI.HorizontalSlider(new Rect(25f, 250f, 60f, 25f), legsNum, 1, 5));
+        legsNum = Mathf.RoundToInt(GUI.HorizontalSlider(new Rect(25f, 250f, 60f, 25f), legsNum, 1, 5)); //a GUI slider to set the number of legs
         legSize = new int[2];
-
-
     }
     
     //random function, just because
@@ -132,11 +101,9 @@ public class Creature : MonoBehaviour {
     void creatureParts()
     {
         headNum = getRandomNum(1, 4);
-        //Debug.Log(headNum);
         bodyNum = getRandomNum(2, 6);
         bodySize = new int[bodyNum];
         armsNum = getRandomNum(1, bodyNum);
-        //armSize = new int[2];
         legsNum = getRandomNum(1, 6);
         legSize = new int[2];
     }
@@ -144,28 +111,16 @@ public class Creature : MonoBehaviour {
     //function for getting size for the parts
     void creatureSize()
     {
-        for(int i = 0; i < 1; i++)
-        {
-            headSize = getRandomNum(1, 4);
-            //Debug.Log(headSize[i]);
-        }
-
-        //for (int i = 0; i < 2; i++)
-        //{
-        //    armSize[i] = getRandomNum(1, 3);
-        //    Debug.Log(headSize[i]);
-        //}
+        headSize = getRandomNum(1, 4);
 
         for (int i = 0; i < 2; i++)
         {
             legSize[i] = getRandomNum(1, 4);
-            //Debug.Log(headSize[i]);
         }
 
         for (int i = 0; i < bodyNum; i++)
         {
             bodySize[i] = getRandomNum(1, 4);
-            //Debug.Log(headSize[i]);
         }
     }
 
@@ -233,7 +188,6 @@ public class Creature : MonoBehaviour {
     void createHead()
     {
         float x = 0, y = 0, z = 0;
-        //y = headPos + (headSize * 0.5f);
         y = height;
         if (headNum == 2)
             z = headSize * 0.5f;
@@ -262,7 +216,6 @@ public class Creature : MonoBehaviour {
         y = height;
         for (int i = 0; i<bodyNum; i++)
         {
-            //y = y + (bodySize[i] * 0.5f);
             y -= (bodySize[i] * 0.5f);
             Creatures = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             Creatures.transform.position = new Vector3(x, y, z);
@@ -322,7 +275,6 @@ public class Creature : MonoBehaviour {
             y = y - (bodySize[i]*0.5f);
             last+=1;
         }
-        //headPos = y;
         last -= 1;
         height = y;
         createLegs();
@@ -403,17 +355,5 @@ public class Creature : MonoBehaviour {
                 size--;
             }
         }
-        //heirarchy();
     }
-
-    //void heirarchy()
-    //{
-    //    GameObject[] heads = GameObject.FindGameObjectsWithTag("Head");
-    //    GameObject[] body = GameObject.FindGameObjectsWithTag("Body");
-    //    GameObject[] upper_arm = GameObject.FindGameObjectsWithTag("Upper Arm");
-    //    GameObject[] lower_arm = GameObject.FindGameObjectsWithTag("Lower Arm");
-    //    GameObject[] hip = GameObject.FindGameObjectsWithTag("Hip");
-    //    GameObject[] upper_leg = GameObject.FindGameObjectsWithTag("Upper Leg");
-    //    GameObject[] lower_leg = GameObject.FindGameObjectsWithTag("Lower Leg");
-    //}
 }

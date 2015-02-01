@@ -47,31 +47,12 @@ public class Plasma : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-       if(Input.GetKeyDown("t"))
-       {
-           GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
-           for (int i = 0; i < objs.Length; i++ )
-           {
-               Destroy(objs[i]);
-           }
-            cor1 = Random.value;
-            cor2 = Random.value;
-            cor3 = Random.value;
-            cor4 = Random.value;
-            drawPlasma(width, length);
-            texture.SetPixels(colour);
-            texture.Apply();
-            loadHeightMap();
-        }
 
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
 	}
 
     void OnGUI()
     {
+        //a GUI button to generate a new terrain
         if (GUI.Button(new Rect(25f, 300f, 120f, 25f), "New Terrain"))
         {
             GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
@@ -87,6 +68,12 @@ public class Plasma : MonoBehaviour {
             texture.SetPixels(colour);
             texture.Apply();
             loadHeightMap();
+        }
+
+        //Quit the application
+        if(GUI.Button(new Rect(25f, 325f, 60f, 25f),"Quit!!"))
+        {
+            Application.Quit();
         }
     }
 
@@ -137,8 +124,6 @@ public class Plasma : MonoBehaviour {
         {
             b = (0.5f - c) * 2;
         }
-
-        //grey = (0.299f * r) + (0.587f * g) + (0.114f * b);
 
         return new Color(r,g,b);
     }
@@ -212,31 +197,25 @@ public class Plasma : MonoBehaviour {
 
                 if (size <= 1.0f && size > 0.75f)
                 {
-                    //colormap.SetPixel(i,j, new Color (0,0,0));
                     colormap.SetPixel(i, j, new Color(1.0f,1.0f,1.0f));
                 }
 
 			    else if (size <= 0.75f && size >0.66f)
                 {
 					colormap.SetPixel(i,j, new Color (0.4f, 0.26f, 0.13f));
-					//colormap.SetPixel(i,j, new Color(255/255.0f,255/255.0f,255/255.0f));
 			    }
 				
                 else if (size <= 0.66f && size> 0.56f)
                 {
 					colormap.SetPixel(i,j, new Color(0.0f, 0.32f, 0.0f));
-					//colormap.SetPixel(i,j, new Color(255/255.0f,255/255.0f,255/255.0f));
 				}
 
 			    else if (size <=0.56f && size > 0.0f)
                 {
 					colormap.SetPixel(i,j, new Color(0.0f, 0.5f, 0.0f));
-					//colormap.SetPixel(i,j, new Color(255/255.0f,255/255.0f,255/255.0f));
 				}
 		    }
 		}
-		//byte[] img = colormap.EncodeToPNG ();
-		//File.WriteAllBytes (Application.dataPath + "/map" + ".png", img);
 		colormap.Apply ();
         applyTerrain();
     }
