@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using System.Collections;
 
 public class Creature : MonoBehaviour {
     private GameObject Creatures, camera;
     private ArrayList myNodes;
+    Material creatureMat;
 
     int headNum;
     int armsNum;
@@ -13,6 +13,7 @@ public class Creature : MonoBehaviour {
     int headSize;
     int[] legSize;
     int[] bodySize;
+    int matNum;
     
     float height;
     bool orbit = false;
@@ -136,6 +137,10 @@ public class Creature : MonoBehaviour {
         }
 
         height += (legSize[0] + legSize[1]) * 1.5f;
+
+        matNum = getRandomNum(1, 5);
+        Debug.Log(matNum);
+        creatureMat = (Material)Resources.Load(matNum.ToString());
     }
 
     //clears the last creature before creating a new creature
@@ -200,6 +205,7 @@ public class Creature : MonoBehaviour {
             Creatures.transform.localScale = new Vector3(headSize, headSize, headSize);
             Creatures.tag = Tags.head;
             Creatures.name = "Head";
+            Creatures.renderer.material = creatureMat;
             myNodes.Add(Creatures);
             z = z - headSize;
         }
@@ -221,6 +227,7 @@ public class Creature : MonoBehaviour {
             Creatures.transform.position = new Vector3(x, y, z);
             Creatures.transform.localScale = new Vector3(bodySize[i], bodySize[i], bodySize[i]);
             Creatures.tag = Tags.body;
+            Creatures.renderer.material = creatureMat;
             if(i == 0)
             {
                 Creatures.name = "Main Body";
@@ -242,6 +249,7 @@ public class Creature : MonoBehaviour {
                 Creatures.transform.localScale = new Vector3(bodySize[i] * 0.5f, bodySize[i] * 0.5f, bodySize[i] * 1.5f);
                 Creatures.tag = Tags.upper_arm;
                 Creatures.name = "Upper Arm";
+                Creatures.renderer.material = creatureMat;
                 myNodes.Add(Creatures);
                 
                 z -= (bodySize[i] * 1.25f);
@@ -250,6 +258,7 @@ public class Creature : MonoBehaviour {
                 Creatures.transform.localScale = new Vector3(bodySize[i] * 0.25f, bodySize[i] * 0.25f, bodySize[i] * 1.0f);
                 Creatures.tag = Tags.lower_arm;
                 Creatures.name = "Lower Arm";
+                Creatures.renderer.material = creatureMat;
                 myNodes.Add(Creatures);
                 z = 0;
 
@@ -259,6 +268,7 @@ public class Creature : MonoBehaviour {
                 Creatures.transform.localScale = new Vector3(bodySize[i] * 0.5f, bodySize[i] * 0.5f, bodySize[i] * 1.5f);
                 Creatures.tag = Tags.upper_arm;
                 Creatures.name = "Upper Arm";
+                Creatures.renderer.material = creatureMat;
                 myNodes.Add(Creatures);
                 
 
@@ -268,6 +278,7 @@ public class Creature : MonoBehaviour {
                 Creatures.transform.localScale = new Vector3(bodySize[i] * 0.25f, bodySize[i] * 0.25f, bodySize[i] * 1.0f);
                 Creatures.tag = Tags.lower_arm;
                 Creatures.name = "Lower Arm";
+                Creatures.renderer.material = creatureMat;
                 myNodes.Add(Creatures);
                 armsCreated += 1;
                 z = 0;
@@ -304,6 +315,7 @@ public class Creature : MonoBehaviour {
                 Creatures.transform.localScale = new Vector3(legSize[size] * 0.5f, 1.0f, legSize[size] * 0.5f);
                 Creatures.tag = Tags.hip;
                 Creatures.name = "Hip";
+                Creatures.renderer.material = creatureMat;
                 myNodes.Add(Creatures);
                 y -= legSize[0] * 0.5f;
             }
@@ -316,11 +328,13 @@ public class Creature : MonoBehaviour {
             {
                 Creatures.tag = Tags.lower_leg;
                 Creatures.name = "Lower Leg";
+                Creatures.renderer.material = creatureMat;
             }
             else
             {
                 Creatures.tag = Tags.upper_leg;
                 Creatures.name = "Upper Leg";
+                Creatures.renderer.material = creatureMat;
             }
             myNodes.Add(Creatures);
                 
@@ -332,11 +346,13 @@ public class Creature : MonoBehaviour {
             {
                 Creatures.tag = Tags.lower_leg;
                 Creatures.name = "Lower Leg";
+                Creatures.renderer.material = creatureMat;
             }
             else
             {
                 Creatures.tag = Tags.upper_leg;
                 Creatures.name = "Upper Leg";
+                Creatures.renderer.material = creatureMat;
             }
             myNodes.Add(Creatures);
             
