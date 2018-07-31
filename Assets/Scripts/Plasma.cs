@@ -24,9 +24,9 @@ public class Plasma : MonoBehaviour {
         size = (float)width + length;
 
         texture = new Texture2D(width, length);
-        renderer.material.mainTexture = texture;
+        GetComponent<Renderer>().material.mainTexture = texture;
 		colormap = new Texture2D (width, length);
-		renderer.material.mainTexture = colormap;
+		GetComponent<Renderer>().material.mainTexture = colormap;
 
         colour = new Color[width * length];
 
